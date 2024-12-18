@@ -8,10 +8,10 @@ import {
   Dimensions,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { MaterialIcons } from "@expo/vector-icons"; // for a new dropdown icon
 
 const ProfileScreen: React.FC = () => {
   const navigation = useNavigation();
-
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const handleLogout = (): void => {
@@ -31,8 +31,13 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.headerText}>Profile</Text>
+      {/* User Info Card */}
+      <View style={[styles.card, styles.userInfoCard]}>
+        <Text style={styles.userInfoText}>John Doe</Text>
+        <Text style={styles.userInfoContact}>+1 (234) 567-890</Text>
+      </View>
 
+      {/* List of Sections */}
       {[
         { title: "Personal Details", navigateTo: "PersonalDetails" },
         { title: "Transactions", navigateTo: "Transactions" },
@@ -48,9 +53,11 @@ const ProfileScreen: React.FC = () => {
             onPress={() => toggleDropdown(title)}
           >
             <Text style={styles.cardTitle}>{title}</Text>
-            <Text style={styles.dropdownIndicator}>
-              {activeDropdown === title ? "▲" : "▼"}
-            </Text>
+            <MaterialIcons
+              name={activeDropdown === title ? "expand-less" : "expand-more"}
+              size={24}
+              color="#7e57c2" // Light purple color for the dropdown icon
+            />
           </TouchableOpacity>
           {activeDropdown === title && (
             <View style={styles.cardContent}>
@@ -68,6 +75,7 @@ const ProfileScreen: React.FC = () => {
         </View>
       ))}
 
+      {/* Footer with Logout and Delete Account */}
       <View style={styles.footer}>
         <TouchableOpacity
           style={[styles.logoutButton, isMobile && styles.logoutButtonMobile]}
@@ -90,21 +98,37 @@ const ProfileScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#e2f3f5", // Vibrant background color
+    backgroundColor: "#f3e5f5", // Light purple background color
     padding: 20,
   },
-  headerText: {
+  userInfoCard: {
+    marginBottom: 20,
+    padding: 25,
+    backgroundColor: "#fbe9e7", // Cream white card background
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 6,
+  },
+  userInfoText: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 20,
-    textAlign: "center",
-    color: "#0d47a1", // Vibrant text color
+    color: "#6a1b9a", // Dark purple color
+  },
+  userInfoContact: {
+    fontSize: 16,
+    color: "#8e24aa", // Lighter purple color
+    marginTop: 8,
   },
   card: {
     marginBottom: 20,
-    padding: 16,
+    padding: 18,
     backgroundColor: "#fff",
-    borderRadius: 8,
+    borderRadius: 12,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
@@ -112,7 +136,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   cardMobile: {
-    padding: 12,
+    padding: 14,
   },
   cardHeader: {
     flexDirection: "row",
@@ -120,30 +144,32 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   cardTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "600",
-    color: "#1b5e20", // Vibrant green color
+    color: "#7e57c2", // Light purple color for title
   },
   dropdownIndicator: {
-    fontSize: 18,
-    color: "#1b5e20", // Matching dropdown color
+    fontSize: 20,
+    color: "#7e57c2", // Matching color for dropdown icon
   },
   cardContent: {
     marginTop: 12,
+    paddingTop: 8,
   },
   cardDetails: {
     fontSize: 14,
-    color: "#37474f", // Muted text color
-    marginBottom: 10,
+    color: "#455a64", // Darker gray for the details text
+    marginBottom: 12,
   },
   button: {
-    backgroundColor: "#3b82f6", // Vibrant blue button color
-    paddingVertical: 10,
-    borderRadius: 6,
+    backgroundColor: "#7e57c2", // Light purple button color
+    paddingVertical: 12,
+    borderRadius: 8,
     alignItems: "center",
+    marginTop: 8,
   },
   buttonMobile: {
-    paddingVertical: 8,
+    paddingVertical: 10,
   },
   buttonText: {
     color: "#fff",
@@ -153,23 +179,23 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   logoutButton: {
-    backgroundColor: "#ef4444",
-    paddingVertical: 12,
-    borderRadius: 6,
+    backgroundColor: "#ef5350", // Red button for logout
+    paddingVertical: 14,
+    borderRadius: 8,
     alignItems: "center",
-    marginBottom: 12,
+    marginBottom: 14,
   },
   deleteButton: {
-    backgroundColor: "#b91c1c",
-    paddingVertical: 12,
-    borderRadius: 6,
+    backgroundColor: "#e57373", // Lighter red for delete account button
+    paddingVertical: 14,
+    borderRadius: 8,
     alignItems: "center",
   },
   logoutButtonMobile: {
-    paddingVertical: 10,
+    paddingVertical: 12,
   },
   deleteButtonMobile: {
-    paddingVertical: 10,
+    paddingVertical: 12,
   },
 });
 
