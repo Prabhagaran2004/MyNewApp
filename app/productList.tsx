@@ -9,7 +9,7 @@ const ProductDetails = ({ product }) => {
       <View style={styles.item}>
         <Text style={styles.label}>Product:</Text>
         <Text style={styles.value}>{product.name}</Text>
-      </View>
+      </View>  
       <View style={styles.item}>
         <Text style={styles.label}>Description:</Text>
         <Text style={styles.value}>{product.description}</Text>
