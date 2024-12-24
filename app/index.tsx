@@ -6,8 +6,16 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Image source={require("@/assets/images/iphone15plus.jpg")} />
-
-      {/* View Product Button */}
+      <Link href="/logIn" style={styles.link} asChild>
+        <Pressable style={styles.button}>
+          <Text style={styles.buttonText}>login</Text>
+        </Pressable>
+      </Link>
+      <Link href="/signUp" style={styles.link} asChild>
+        <Pressable style={styles.button}>
+          <Text style={styles.buttonText}>signUp</Text>
+        </Pressable>
+      </Link>
       <Link href="/productList" style={styles.link} asChild>
         <Pressable style={styles.button}>
           <Text style={styles.buttonText}>View Product</Text>
