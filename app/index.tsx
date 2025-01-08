@@ -1,12 +1,14 @@
 import { Link } from 'expo-router';
 import { Image, StyleSheet, Pressable, View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 
 export default function HomeScreen() {
   return (
+    <ScrollView>
     <View style={styles.container}>
       <View style={styles.desc}>
         <Image 
-          source={require('@/assets/images/iphone15plus.jpg')} 
+          source={require('@/assets/images/ip15.jpg')} 
           style={{ margin: 20, marginTop: 30 }} 
         />
         <Text style={{ fontSize: 20, margin: 20, flex: 1, marginTop: 120 }}>
@@ -15,9 +17,9 @@ export default function HomeScreen() {
       </View>
       
       <View style={{ flexDirection: 'row' }}>
-        <Link href="/productList" style={styles.link} asChild>
+        <Link href="/ProductDetails" style={styles.link} asChild>
           <Pressable style={styles.button}>
-            <Text style={styles.buttonText}>View Product</Text>
+            <Text style={styles.buttonText}>View Product Details</Text>
           </Pressable>
         </Link>
         <Link href="/Subscription" style={styles.link} asChild>
@@ -52,7 +54,23 @@ export default function HomeScreen() {
           <Text style={styles.buttonText}>Go to Profile</Text>
         </Pressable>
       </Link>
+
+      <View>
+        <Link href={'/UploadItems'} style={styles.link} asChild>
+          <Pressable style = { styles.button }>
+            <Text style = {styles.buttonText}>Upload Items</Text>
+          </Pressable>
+        </Link>
+      </View>
+      <View>
+        <Link href={'/UploadedRecords'} style={styles.link} asChild>
+          <Pressable style = { styles.button }>
+            <Text style = {styles.buttonText}>Uploaded Items</Text>
+          </Pressable>
+        </Link>
+      </View>
     </View>
+    </ScrollView>
   );
 }
 

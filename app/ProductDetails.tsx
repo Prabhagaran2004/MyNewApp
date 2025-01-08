@@ -1,15 +1,11 @@
 import { Link } from 'expo-router';
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const ProductDetails = ({ product }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Product Details</Text>
-      <View style={styles.item}>
-        <Text style={styles.label}>Product:</Text>
-        <Text style={styles.value}>{product.name}</Text>
-      </View>  
+      <Text style={styles.title}>Product : <Text style = {{fontWeight : '500'}}> {product.name} </Text> </Text>
       <View style={styles.item}>
         <Text style={styles.label}>Description:</Text>
         <Text style={styles.value}>{product.description}</Text>
@@ -65,19 +61,57 @@ const styles = StyleSheet.create({
   value: {
     flex: 1,
     color: '#555',
+    fontWeight : '400'
   },
 });
 
 export default function App() {
-  const sampleProduct = {
-    name: 'Iphone 15 plus',
-    description: 'A High End Mobile gaming smartphone',
-    count: 10,
-    location: 'Warehouse A',
-    date: '2024-12-16',
-    pay: 1200,
-    status: 'Delivered',
-  };
+  const sampleProducts = [
+    {
+      name: 'IPhone 15 Plus',
+      description: 'A High End Mobile gaming smartphone',
+      count: 10,
+      location: 'Warehouse A',
+      date: '2024-12-16',
+      pay: 1200,
+      status: 'Delivered',
+    },
+    {
+      name: 'MacBook Pro M3',
+      description: 'Professional grade laptop with Apple Silicon',
+      count: 5,
+      location: 'Warehouse B',
+      date: '2024-12-20',
+      pay: 299,
+      status: 'Delivered',
+    },
+    {
+      name: 'IPad Air 6',
+      description: 'Versatile tablet for creativity and productivity',
+      count: 15,
+      location: 'Warehouse A',
+      date: '2024-12-18',
+      pay: 599,
+      status: 'Processing',
+    },
+    {
+      name: 'AirPods Pro 3',
+      description: 'Premium wireless earbuds with noise cancellation',
+      count: 30,
+      location: 'Warehouse C',
+      date: '2024-12-15',
+      pay: 249,
+      status: 'Delivered',
+    }
+  ];
 
-  return <ProductDetails product={sampleProduct} />;
+  return (
+    <ScrollView>
+      <View>
+        {sampleProducts.map((product, index) => (
+          <ProductDetails key={index} product={product} />
+        ))}
+      </View>
+    </ScrollView>
+  );
 }
